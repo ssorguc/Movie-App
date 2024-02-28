@@ -20,48 +20,47 @@ const options = {
 
 fetch(imagesURL, options).then(response => response.json()).then(data => {
   const templ =
-    `
-    <div id="carouselExampleIndicators" class="carousel slide">
-    <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-            aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-            aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-            aria-label="Slide 3"></button>
-    </div>
+    `<div id="carouselExampleInterval" class="carousel slide background-img" data-ride="carousel" style="background: url('https://image.tmdb.org/t/p/w500/${data.backdrops[4].file_path}');">
     <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src="https://image.tmdb.org/t/p/w500/${data.backdrops[9].file_path}" class="d-block w-100" alt="Movie Theater" />
-        </div>
-        <div class="carousel-item">
-            <img src="https://image.tmdb.org/t/p/w500/${data.backdrops[6].file_path}" class="d-block w-100" alt="Popcorn" />
-        </div>
-        <div class="carousel-item">
-            <img src="https://image.tmdb.org/t/p/w500/${data.backdrops[7].file_path}" class="d-block w-100" alt="Friends" />
-        </div>
+      <div class="carousel-item active" data-interval="10000">
+        <img src="https://image.tmdb.org/t/p/w500/${data.backdrops[2].file_path}" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item" data-interval="10000">
+        <img src="https://image.tmdb.org/t/p/w500/${data.backdrops[1].file_path}" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item data-interval="1000"">
+        <img src="https://image.tmdb.org/t/p/w500/${data.backdrops[0].file_path}" class="d-block w-100" alt="...">
+      </div>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-        data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-        data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
-</div>
+    <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+  
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+     
+    </a>
+  </div>
     `;
 
   document.getElementById("galerija").insertAdjacentHTML("afterbegin", templ);
-})
+}).catch(err => {
+  const toastLiveExample = document.getElementById("liveToast");
+  document.getElementById("error-message").innerHTML = err.message;
+  const toast = new bootstrap.Toast(toastLiveExample);
+  toast.show();
+});
 
 fetch(imagesURL, options).then(response => response.json()).then(data => {
+}).catch(err => {
+  const toastLiveExample = document.getElementById("liveToast");
+  document.getElementById("error-message").innerHTML = err.message;
+  const toast = new bootstrap.Toast(toastLiveExample);
+  toast.show();
 });
 
 
-const appendToResponse = 'videos,credits'; // Example: Videos and credits
+const appendToResponse = 'genre,keywords,alternative_titles,changes,credits,images,keywords,lists,releases,reviews,similar,translations,videos';
 
 const apiUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&append_to_response=${appendToResponse}`;
 

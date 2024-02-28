@@ -29,12 +29,13 @@ const options = {
 };
 
 fetch(popularURL, options).then((response) => response.json()).then((data) => {
+    //throw new Error("Please try again later. Server is down.");
     let movies = data.results;
     let brojCol = 1;
 
     for (let i = 0; i < 4; i++) {
         const singleMovie = `
-        <div class="main-container">
+        <div class="main-container" onclick="openDetails(${movies[i].id})">
         <div class="poster-container">
             <a href="#"><img src="https://image.tmdb.org/t/p/original/${movies[i].poster_path}" class="poster" /></a>
         </div>
@@ -54,7 +55,12 @@ fetch(popularURL, options).then((response) => response.json()).then((data) => {
         document.getElementById(brojCol)?.insertAdjacentHTML('afterbegin', singleMovie);
         brojCol++;
     }
-})
+}).catch(err => {
+    const toastLiveExample = document.getElementById("liveToast");
+    document.getElementById("error-message").innerHTML = err.message;
+    const toast = new bootstrap.Toast(toastLiveExample);
+    toast.show();
+});
 
 
 
@@ -84,20 +90,18 @@ function delayedLoading() {
 
     fetch(searchURL, options).then((response) => response.json()).then((data) => {
         const pronadeniFilmovi = data.results;
+        console.log(pronadeniFilmovi);
         pronadeniFilmovi.forEach((element) => {
             const movieFoundHTML = `<div onclick="openDetails(${element.id})" class="movie_card" id="ave">
             <div class="info_section">
               <div class="movie_header">
                 <img class="locandina" src="https://image.tmdb.org/t/p/original/${element.poster_path}"/>
                 <h1>${element.title}</h1>
-                <h4>2018, Ryan Coogler</h4>
-                <span class="minutes">134 min</span>
-                <p class="type">Action, Adventure, Sci-Fi</p>
-              </div>
-              <div class="movie_desc">
-                <p class="text">
-                ${element.overview}
+                <p class="movie_desc">
+                ${limitString(element.overview, 10)}
                 </p>
+                <span class="minutes">${element.release_date.slice(0, 4)
+                }</span>
               </div>
               
             </div>
@@ -107,7 +111,12 @@ function delayedLoading() {
             moviesFound.insertAdjacentHTML('beforeend', movieFoundHTML);
         })
 
-    })
+    }).catch(err => {
+        const toastLiveExample = document.getElementById("liveToast");
+        document.getElementById("error-message").innerHTML = err.message;
+        const toast = new bootstrap.Toast(toastLiveExample);
+        toast.show();
+    });
 
 
     resultDiv.appendChild(moviesFound);
@@ -149,8 +158,20 @@ function createAccount() {
         let homepage = document.getElementById("homepage-link");
         homepage.href = "index.html";
         homepage.textContent = "Back to home page";
-
     } else {
         document.getElementById("signupMessage").innerHTML = "Username is taken"
     }
+}
+
+function limitString(text, limit) {
+    if (typeof text !== 'string') {
+        throw new Error("Parameter has to be a string")
+    }
+    const words = text.split(' ');
+
+    if (words.length > limit) {
+        const shortenedString = words.slice(0, limit).join(' ') + '...';
+        return shortenedString;
+    }
+    return text;
 }
