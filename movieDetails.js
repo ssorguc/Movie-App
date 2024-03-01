@@ -13,7 +13,7 @@ const options = {
   headers: {
     accept: "application/json",
     Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhNDk2Nzg4ZDZkZDg3MjZhYjBhMzAwZjg3YjIyYTdlYiIsInN1YiI6IjU5ZTI1YWM0YzNhMzY4N2MwNTAwMjI5MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.xdpv-G8ChAsKwkP5l7-E-G2_3xLEZWopJoaRnMyMAUM",
+      "Bearer yourtoken",
   },
 };
 
@@ -58,10 +58,15 @@ fetch(imagesURL, options).then(response => response.json()).then(data => {
 })
 
 fetch(imagesURL, options).then(response => response.json()).then(data => {
+}).catch((err) => {
+  const toastLiveExample = document.getElementById("liveToast");
+  document.getElementById("error-message").innerHTML = err.message;
+  const toast = new bootstrap.Toast(toastLiveExample);
+  toast.show();
 });
 
 
-const appendToResponse = 'videos,credits'; // Example: Videos and credits
+const appendToResponse = 'genre,keywords,alternative_titles,changes,credits,images,keywords,lists,releases,reviews,similar,translations,videos';
 
 const apiUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&append_to_response=${appendToResponse}`;
 
@@ -69,7 +74,10 @@ fetch(apiUrl)
   .then(response => response.json())
   .then(data => {
     console.log(data);
-  })
-  .catch(error => {
-    console.error('Error fetching movie details:', error);
+    const templ = ``;
+  }).catch((err) => {
+    const toastLiveExample = document.getElementById("liveToast");
+    document.getElementById("error-message").innerHTML = err.message;
+    const toast = new bootstrap.Toast(toastLiveExample);
+    toast.show();
   });
