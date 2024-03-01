@@ -29,8 +29,7 @@ const options = {
 };
 
 fetch(popularURL, options).then((response) => response.json()).then((data) => {
-    //throw new Error("Try again later!");
-
+    //throw new Error("Please try again later. Server is down.");
     let movies = data.results;
     let brojCol = 1;
 
@@ -56,12 +55,12 @@ fetch(popularURL, options).then((response) => response.json()).then((data) => {
         document.getElementById(brojCol)?.insertAdjacentHTML('afterbegin', singleMovie);
         brojCol++;
     }
-}).catch((err) => {
+}).catch(err => {
     const toastLiveExample = document.getElementById("liveToast");
     document.getElementById("error-message").innerHTML = err.message;
     const toast = new bootstrap.Toast(toastLiveExample);
     toast.show();
-})
+});
 
 
 
@@ -92,16 +91,20 @@ function delayedLoading() {
     fetch(searchURL, options).then((response) => response.json()).then((data) => {
         console.log(data)
         const pronadeniFilmovi = data.results;
+        console.log(pronadeniFilmovi);
         pronadeniFilmovi.forEach((element) => {
             const movieFoundHTML = `<div onclick="openDetails(${element.id})" class="movie_card" id="ave">
             <div class="info_section">
               <div class="movie_header">
                 <img class="locandina" src="https://image.tmdb.org/t/p/original/${element.poster_path}"/>
                 <h1>${element.title}</h1>
-                <p class="movie_desc">${limitString(element.overview, 10)}</p>
-                <span class="minutes">${element.release_date.slice(0, 4)}</span>
+                <p class="movie_desc">
+                ${limitString(element.overview, 10)}
+                </p>
+                <span class="minutes">${element.release_date.slice(0, 4)
+                }</span>
               </div>
-            
+              
             </div>
             <div class="blur_back ave_back"></div>
           </div>            
@@ -109,7 +112,7 @@ function delayedLoading() {
             moviesFound.insertAdjacentHTML('beforeend', movieFoundHTML);
         })
 
-    }).catch((err) => {
+    }).catch(err => {
         const toastLiveExample = document.getElementById("liveToast");
         document.getElementById("error-message").innerHTML = err.message;
         const toast = new bootstrap.Toast(toastLiveExample);
@@ -156,7 +159,6 @@ function createAccount() {
         let homepage = document.getElementById("homepage-link");
         homepage.href = "index.html";
         homepage.textContent = "Back to home page";
-
     } else {
         document.getElementById("signupMessage").innerHTML = "Username is taken"
     }
