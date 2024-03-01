@@ -24,7 +24,7 @@ const options = {
     headers: {
         accept: "application/json",
         Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhNDk2Nzg4ZDZkZDg3MjZhYjBhMzAwZjg3YjIyYTdlYiIsInN1YiI6IjU5ZTI1YWM0YzNhMzY4N2MwNTAwMjI5MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.xdpv-G8ChAsKwkP5l7-E-G2_3xLEZWopJoaRnMyMAUM",
+            "Bearer yourtoken",
     },
 };
 
@@ -89,6 +89,7 @@ function delayedLoading() {
     let searchURL = `https://api.themoviedb.org/3/search/movie?query=%22${searchWord}%22&include_adult=false&language=en-US&page=1&api_key=${apiKey}`;
 
     fetch(searchURL, options).then((response) => response.json()).then((data) => {
+        console.log(data)
         const pronadeniFilmovi = data.results;
         console.log(pronadeniFilmovi);
         pronadeniFilmovi.forEach((element) => {
