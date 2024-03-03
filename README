@@ -1,7 +1,3 @@
-#Lekcija 16
+#Lekcija 17
 
-1. Login and Sign up forma sakrivena nakon uspjesne poruke
-2. Toast
-3. Catch metoda sa toast-om
-4. Sredivanje Search kartica i limitString
-5. Detalji filma i append na URL
+1. Infinite scroll
