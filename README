@@ -1,7 +1,14 @@
-#Lekcija 16
+#Lekcija 18
 
-1. Login and Sign up forma sakrivena nakon uspjesne poruke
-2. Toast
-3. Catch metoda sa toast-om
-4. Sredivanje Search kartica i limitString
-5. Detalji filma i append na URL
+1. Removing ALL MOVIES TITLE from movies.html
+2. Creating config.js with apiKey, options and base URL.rest of the URLs stay in individual JS files bacause sometimes we have to creat them differently each time like in case of a specific movie id or seach word.Imported it in head that so it gets loaded first.Remove those variables from other files less lines of code
+3. Delete unnecessary fetch calls from movieDetails and use one fetch
+4. Use only url with append that already has images. Use foreach to create all slides. 
+5. Using index to mark first slide that has to be active.
+6. Fill in other info on the left.
+7. Add video with iframe and src starts with https://www.youtube.com/embed + video.key. We need to find a video from list of videos that have name that contains trailer.
+const video =
+      `<iframe class="px-3" height="560px" width="100%" src="https://www.youtube.com/embed/${findTrailer.key}">
+      </iframe>
+    `;
+8. Add in the col align-self-end

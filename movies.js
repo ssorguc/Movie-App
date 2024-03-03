@@ -1,5 +1,4 @@
 'use strict';
-console.log('allmovies')
 let page = 1;
 
 
@@ -30,7 +29,6 @@ window.onload = function () {
 
 function handleScroll() {
     const endOfPage = window.innerHeight + window.pageYOffset >= document.body.offsetHeight;
-    console.log(window.innerHeight + window.pageYOffset)
     if (endOfPage) {
         loadMore()
     }
