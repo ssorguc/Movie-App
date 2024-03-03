@@ -2,18 +2,18 @@
 console.log('allmovies')
 let page = 1;
 
+
 function loadMore() {
     const topRatedURL = `https://api.themoviedb.org/3/movie/popular?language=en-US&page=${page}&api_key=${apiKey}`;
     fetch(topRatedURL, options).then((response) => response.json()).then((data) => {
-        page++;
         let movies = data.results;
+        page++;
         movies.forEach(movie => {
             const templ = `
-            <img onclick="openDetails(${movie.id})" src="https://image.tmdb.org/t/p/original/${movie.poster_path}" height="200px" class="p-1"/>
-            `;
+          <img onclick="openDetails(${movie.id})" src="https://image.tmdb.org/t/p/original/${movie.poster_path}" height="300px" class="p-1"/>
+          `;
 
             document.getElementById("all-movies").insertAdjacentHTML('beforeend', templ);
-
         })
     }).catch(err => {
         const toastLiveExample = document.getElementById("liveToast");
@@ -23,16 +23,17 @@ function loadMore() {
     });
 }
 
+
 window.onload = function () {
     loadMore();
 };
 
-const handleInfiniteScroll = () => {
+function handleScroll() {
     const endOfPage = window.innerHeight + window.pageYOffset >= document.body.offsetHeight;
+    console.log(window.innerHeight + window.pageYOffset)
     if (endOfPage) {
-        console.log("end")
-        loadMore();
+        loadMore()
     }
-};
+}
 
-window.addEventListener("scroll", handleInfiniteScroll);
+window.addEventListener('scroll', handleScroll);
