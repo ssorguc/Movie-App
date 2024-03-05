@@ -7,10 +7,7 @@ class User {
     }
 }
 
-console.log("script js")
-
 //Global variables
-const apiKey = "a496788d6dd8726ab0a300f87b22a7eb";
 const popularURL = `https://api.themoviedb.org/3/movie/popular?language=en-US&page=1&api_key=${apiKey}`;
 
 const users = [
@@ -19,17 +16,7 @@ const users = [
     new User("user3", "securePwd"),
 ];
 
-const options = {
-    method: "GET",
-    headers: {
-        accept: "application/json",
-        Authorization:
-            "Bearer yourtoken",
-    },
-};
-
 fetch(popularURL, options).then((response) => response.json()).then((data) => {
-    //throw new Error("Please try again later. Server is down.");
     let movies = data.results;
     let brojCol = 1;
 
@@ -89,9 +76,7 @@ function delayedLoading() {
     let searchURL = `https://api.themoviedb.org/3/search/movie?query=%22${searchWord}%22&include_adult=false&language=en-US&page=1&api_key=${apiKey}`;
 
     fetch(searchURL, options).then((response) => response.json()).then((data) => {
-        console.log(data)
         const pronadeniFilmovi = data.results;
-        console.log(pronadeniFilmovi);
         pronadeniFilmovi.forEach((element) => {
             const movieFoundHTML = `<div onclick="openDetails(${element.id})" class="movie_card" id="ave">
             <div class="info_section">
