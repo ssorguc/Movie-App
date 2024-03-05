@@ -42,7 +42,11 @@ fetch(movieDetailURL, options)
     document.getElementById("genre").innerHTML = data.genres.map(x => x.name);
     document.getElementById("desc").innerHTML = data.overview;
     document.getElementById("cast").innerHTML = data.casts.cast.map(x => x.name).filter((_elm, index) => index < 5);
+    debugger;
     let findTrailer = data.videos.results.find(elm => elm.type === "Trailer");
+    if (findTrailer === undefined && data.videos.results.length !== 0) {
+      findTrailer = data.videos.results.find((_elm, index) => index === 0);
+    }
     const video =
       `<iframe class="px-3" height="500px" width="100%" src="https://www.youtube.com/embed/${findTrailer?.key}">
     </iframe>

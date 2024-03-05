@@ -10,13 +10,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
     <script src="config.js"></script>
+    <script src="user-management.js"></script>
+    <script src="user-management.js"></script>
 </head>
 
 <body data-bs-theme="dark">
     <!-----------------NAVBAR-------------------->
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Movie Night Pro</a>
+            <a class="navbar-brand" href="index.html">Movie Night Pro</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -29,19 +31,19 @@
                     <li class="nav-item">
                         <a class="nav-link" href="movies.html">Movies</a>
                     </li>
-                    <li class="nav-item">
+                    <li id="login-nav-item" class="nav-item">
                         <a class="nav-link" href="login.html">Login</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
-                            Snacks
+                            Services
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Popcorn</a></li>
-                            <li><a class="dropdown-item" href="#">Tacos</a></li>
+                            <li><a class="dropdown-item" href="#">Book</a></li>
+                            <li><a class="dropdown-item" href="#">Snacks</a></li>
                             <li>
-                                <a class="dropdown-item" href="#">Chips</a>
+                                <a class="dropdown-item" href="#">Pricing</a>
                             </li>
                         </ul>
                     </li>
@@ -50,10 +52,10 @@
         </div>
     </nav>
     <!------------------HEADER-------------------->
-    <div class="containr text-center">
-        <div class="row align-items-center pt-5">
+    <div class="container text-center">
+        <div class="row pt-5 search-container">
             <div class="col-md"></div>
-            <div class="col-md d-flex">
+            <div class="col-md d-flex align-items-end">
                 <input id="searchInput" class="form-control me-2" type="search" placeholder="Search"
                     aria-label="Search" />
                 <button class="btn btn-outline-danger" type="submit" onclick="searchMovies()">Search</button>
@@ -62,8 +64,8 @@
             <div id="result"></div>
         </div>
     </div>
-    <div class="container text-center mt-5 mb-5">
-        <h1 class="display-2 mb-5">Top movies today</h1>
+    <div class="container text-center p-5 rounded">
+        <h1 class="display-2 mb-5 text-warning">Top movies today</h1>
         <div class="row align-items-center">
             <div id="1" class="col-lg-3"></div>
             <div id="2" class="col-lg-3"></div>
@@ -71,8 +73,19 @@
             <div id="4" class="col-lg-3"></div>
         </div>
     </div>
-
-    <div id="carouselExampleIndicators" class="carousel slide">
+    <!--SERVICES-->
+    <div class="p-5 mt-5 mx-5 bg-body-tertiary rounded-3">
+        <div class="container-fluid py-5">
+            <h1 class="display-5 fw-bold">Our Services</h1>
+            <p class="col-md-8 fs-4">Welcome to our exclusive cinema experience brought right to your doorstep! Choose
+                from our three distinctive packages designed to elevate your movie nights. With seamless service and
+                top-notch cinematic quality, we've got something for everyone.
+            </p>
+            <button onclick="openAllMovies()" class="btn btn-primary btn-lg" type="button">Find your movie</button>
+        </div>
+    </div>
+    <!--SLIDES-->
+    <div id="carouselExampleIndicators" class="carousel slide my-5">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
                 aria-current="true" aria-label="Slide 1"></button>
@@ -103,7 +116,104 @@
             <span class="visually-hidden">Next</span>
         </button>
     </div>
+    <!--PRICING-->
+    <div class="container m-5">
+        <div class="pricing-header p-3 pb-md-4 mx-auto text-center m-5">
+            <h1 class="display-4 fw-normal text-body-emphasis">Pricing and Service Packages</h1>
+            <p class="fs-5 text-body-secondary m-5">We believe in making your movie nights unforgettable. Select your
+                preferred package, add personalized touches, and let us bring the magic of the cinema to your home. Book
+                your package now and transform your living room into a private movie haven!
+            </p>
+        </div>
+        <main class="px-5 m-5">
+            <div class="row row-cols-1 row-cols-md-3 mb-5 text-center">
+                <div class="col">
+                    <div class="card mb-4 rounded-3 shadow-sm">
+                        <div class="card-header py-3">
+                            <h4 class="my-0 fw-normal">Ciné Starter"</h4>
+                        </div>
+                        <div class="card-body pricing-card">
+                            <h1 class="card-title pricing-card-title">$49.99<small
+                                    class="text-body-secondary fw-light">/mo</small></h1>
+                            <p>The "Ciné Starter" package is perfect for a cozy movie night with your loved ones. Enjoy
+                                a curated selection of blockbuster movies with our portable screening setup.
+                            </p>
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li>Portable projector and screen delivery</li>
+                                <li>Movie selection from our extensive library
+                                </li>
+                                <li>Standard snack package (popcorn, candy, and soft drinks)
+                                </li>
+                                <li>Delivery and setup included
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card mb-4 rounded-3 shadow-sm">
+                        <div class="card-header py-3">
+                            <h4 class="my-0 fw-normal">Ciné Deluxe</h4>
+                        </div>
+                        <div class="card-body pricing-card">
+                            <h1 class="card-title pricing-card-title">$79.99<small
+                                    class="text-body-secondary fw-light">/mo</small></h1>
+                            <p>The "Ciné Deluxe" package is designed for those seeking a touch of luxury in their home
+                                cinema experience.
+                            </p>
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li>High-definition projector and screen delivery
+                                </li>
+                                <li>Expanded movie library with exclusive releases
+                                </li>
+                                <li>Deluxe snack package (gourmet popcorn, assorted chocolates, and beverages)
+                                </li>
+                                <li>Delivery, setup, and technical support included
+                                </li>
+                            </ul>
 
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card mb-4 rounded-3 shadow-sm border-primary">
+                        <div class="card-header py-3 text-bg-primary border-primary">
+                            <h4 class="my-0 fw-normal">Ciné Premiere</h4>
+                        </div>
+                        <div class="card-body pricing-card">
+                            <h1 class="card-title pricing-card-title">$129.99<small
+                                    class="text-body-secondary fw-light">/mo</small></h1>
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li>State-of-the-art 4K projector and premium screen delivery
+                                </li>
+                                <li>Access to an exclusive movie catalog, including early releases
+                                </li>
+                                <li>Gourmet snack package (premium popcorn flavors, artisanal chocolates, and a
+                                    selection of beverages)
+                                </li>
+                                <li>Professional setup by our cinema experts, ensuring optimal audio-visual experience
+                                </li>
+                                <li>Complimentary cinema-style seating
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <!--FOOTER-->
+    <div class="container mt-5">
+        <footer class="py-3 my-5">
+            <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+                <li class="nav-item"><a href="index.html" class="nav-link px-2 text-body-secondary">Home</a></li>
+                <li class="nav-item"><a href="contact.html" class="nav-link px-2 text-body-secondary">Contact</a></li>
+                <li class="nav-item"><a href="snacks.html" class="nav-link px-2 text-body-secondary">Snacks</a></li>
+                <li class="nav-item"><a href="movieDetails.js" class="nav-link px-2 text-body-secondary">Book</a></li>
+            </ul>
+            <p class="text-center text-body-secondary">© 2024 MovieNightPro, Inc</p>
+        </footer>
+    </div>
     <div class="toast-container position-fixed bottom-0 start-0 p-6">
         <div class="toast" id="liveToast" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-body">

@@ -9,7 +9,7 @@ function loadMore() {
         page++;
         movies.forEach(movie => {
             const templ = `
-          <img onclick="openDetails(${movie.id})" src="https://image.tmdb.org/t/p/original/${movie.poster_path}" height="300px" class="p-1"/>
+          <img onclick="openDetails(${movie.id})" src="https://image.tmdb.org/t/p/original/${movie.poster_path}" height="400px" class="p-1 movie-cover"/>
           `;
 
             document.getElementById("all-movies").insertAdjacentHTML('beforeend', templ);

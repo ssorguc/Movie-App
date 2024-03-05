@@ -320,3 +320,23 @@ button {
 .flex {
     display: flex;
 }
+
+.pricing-card {
+    min-height: 400px;
+}
+
+.search-container {
+    min-height: 400px;
+}
+
+.wave-bg {
+    background-image: url('https://pngimg.com/d/filmstrip_PNG74.png');
+    background-size: contain;
+    min-height: 100px;
+    margin: 10px;
+}
+
+.movie-cover:hover {
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.447);
+    cursor: pointer;
+}

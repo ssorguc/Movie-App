@@ -1,20 +1,7 @@
 'use strict';
 
-class User {
-    constructor(username, password) {
-        this.username = username;
-        this.password = password;
-    }
-}
-
 //Global variables
 const popularURL = `https://api.themoviedb.org/3/movie/popular?language=en-US&page=1&api_key=${apiKey}`;
-
-const users = [
-    new User("user1", "pass123"),
-    new User("user2", "securePwd"),
-    new User("user3", "securePwd"),
-];
 
 fetch(popularURL, options).then((response) => response.json()).then((data) => {
     let movies = data.results;
@@ -81,7 +68,7 @@ function delayedLoading() {
             const movieFoundHTML = `<div onclick="openDetails(${element.id})" class="movie_card" id="ave">
             <div class="info_section">
               <div class="movie_header">
-                <img class="locandina" src="https://image.tmdb.org/t/p/original/${element.poster_path}"/>
+                <img class="locandina" src="${element.poster_path ? "https://image.tmdb.org/t/p/original/" + element.poster_path : "assets/movie-icon.png"}"/>
                 <h1>${element.title}</h1>
                 <p class="movie_desc">
                 ${limitString(element.overview, 10)}
@@ -113,40 +100,8 @@ function openDetails(id) {
     window.open("movieDetails.html", "_self");
 }
 
-
-function attemptLogin() {
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
-    let user = users.find(user => user.username === username && user.password === password)
-    if (user !== undefined) {
-        document.getElementById("loginMessage").style.color = "green";
-        document.getElementById("loginMessage").innerHTML = "Login successful";
-        document.getElementById("loginForm").hidden = true;
-    }
-    else {
-        document.getElementById("loginMessage").style.color = "red";
-        document.getElementById("loginMessage").innerHTML = "Login failed. Check your email or passwrod.";
-    }
-}
-
-function createAccount() {
-    let newUsername = document.getElementById("usernameSignUp").value;
-    let newPass = document.getElementById("passwordSignUp").value;
-
-    //Pokusaj naci postojeceg korisnika
-    let postojeciUser = users.find(user => user.username === newUsername);
-
-    if (postojeciUser === undefined) {
-        let newUser = new User(newUsername, newPass);
-        users.push(newUser);
-        document.getElementById("signupMessage").innerHTML = "You have created and account. Welcome!"
-        document.getElementById("signupForm").hidden = true;
-        let homepage = document.getElementById("homepage-link");
-        homepage.href = "index.html";
-        homepage.textContent = "Back to home page";
-    } else {
-        document.getElementById("signupMessage").innerHTML = "Username is taken"
-    }
+function openAllMovies() {
+    window.open("movies.html", "_self");
 }
 
 function limitString(text, limit) {
