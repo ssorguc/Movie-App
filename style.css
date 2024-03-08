@@ -340,3 +340,14 @@ button {
     box-shadow: 0 4px 10px rgba(255, 255, 255, 0.447);
     cursor: pointer;
 }
+
+.user-icon {
+    height: 30px;
+    margin: 0 10px 0 5px;
+}
+
+#username-navbar {
+    color: rgb(106, 193, 205);
+    text-transform: uppercase;
+    font-size: 14px;
+}

@@ -7,14 +7,21 @@ class User {
     }
 }
 
+let userNavbar = document.getElementById("user-navlink");
+userNavbar.hidden = true;
+let usernameNavbar = document.getElementById("username-navbar");
+
 const users = [
     new User("user1", "pass123"),
     new User("user2", "securePwd"),
     new User("user3", "securePwd"),
 ];
 const user = localStorage.getItem("user");
+
 if (user) {
     document.getElementById("login-nav-item").hidden = true;
+    userNavbar.hidden = false;
+    usernameNavbar.textContent = user;
 }
 
 
@@ -28,6 +35,8 @@ function attemptLogin() {
         document.getElementById("loginForm").hidden = true;
         localStorage.setItem("user", username);
         document.getElementById("login-nav-item").hidden = true;
+        userNavbar.hidden = false;
+        usernameNavbar.textContent = username;
     }
     else {
         document.getElementById("loginMessage").style.color = "red";
@@ -50,7 +59,16 @@ function createAccount() {
         let homepage = document.getElementById("homepage-link");
         homepage.href = "index.html";
         homepage.textContent = "Back to home page";
+        userNavbar.hidden = false;
+        usernameNavbar.textContent = newUser;
     } else {
         document.getElementById("signupMessage").innerHTML = "Username is taken"
     }
+}
+
+function logout() {
+    userNavbar.hidden = true;
+    usernameNavbar.textContent = ""
+    usernameNavbar.hidden = true;
+    document.getElementById("loginForm").hidden = false;
 }
